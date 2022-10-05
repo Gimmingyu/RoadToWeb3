@@ -1,0 +1,20 @@
+{
+  "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
+  "external_url": "https://alchemy.com",
+  "image": "https://ipfs.filebase.io/ipfs/QmVt88X9irkD7evM4gfHhEQDTUwTj91ZXyaX6rmsropTrr",
+  "name": "ERC721 PoK",
+  "attributes": [
+    {
+      "trait_type": "Coolness",
+      "value": "A lot"
+    },
+    {
+      "trait_type": "Website",
+      "value": "Alchemy.com"
+    },
+    {
+      "trait_type": "Token standard",
+      "value": "ERC721"
+    }
+  ]
+}
