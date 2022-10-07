@@ -7,7 +7,7 @@
 const hre = require("hardhat");
 
 async function getBalance(address) {
-  const balanceBigInt = await hre.waffle.provider.getBalance(address);
+  const balanceBigInt = await hre.ethers.provider.getBalance(address);
   return hre.ethers.utils.formatEther(balanceBigInt);
 }
 
@@ -24,36 +24,57 @@ async function printMemos(memos) {
     const timestamp = memo.timestamp;
     const tipper = memo.name;
     const tipperAddress = memo.from;
-    const message = memo.name;
-    console.log(`At ${timestamp}, ${tipper} (${tipperAddress}) said : "${message}"`);
+    const message = memo.message;
+    console.log(
+      `At ${timestamp}, ${tipper} (${tipperAddress}) said : "${message}"`
+    );
   }
 }
 
 async function main() {
-  // Get example accounts. 
+  // Get example accounts.
   const [owner, tipper, tipper2, tipper3] = await hre.ethers.getSigners();
 
   // Get the contract to deploy.
   const BuyMeACoffee = await hre.ethers.getContractFactory("BuyMeACoffee");
-  // Deploy contract. 
+  // Deploy contract.
   const buyMeACoffee = await BuyMeACoffee.deploy();
   await buyMeACoffee.deployed();
 
   console.log("BuyMeACoffee deployed to ", buyMeACoffee.address);
 
   // Check balances before the coffee purchase.
-  const addresses = [owner.address, tipper.address, buyMeACoffee.address]
+  const addresses = [owner.address, tipper.address, buyMeACoffee.address];
   console.log(" -- start -- ");
-  await printBalance(addresses)
+  await printBalance(addresses);
+
   // Buy the owner a few coffees.
+  const tip = { value: hre.ethers.utils.parseEther("1") };
+  await buyMeACoffee
+    .connect(tipper)
+    .buyCoffee("Caroliana", "You're the best!", tip);
+  await buyMeACoffee
+    .connect(tipper2)
+    .buyCoffee("Vitto", "Amaing teacher :-)", tip);
+  await buyMeACoffee
+    .connect(tipper3)
+    .buyCoffee("Kay", "I love my Proof of knowledge NFT", tip);
 
   // Check balanaces after coffee purchase.
+  console.log(" -- bought coffee -- ");
+  await printBalance(addresses);
 
   // Withdraw funcs.
+  await buyMeACoffee.connect(owner).withdrawTips();
 
   // Check balance after withdraw.
+  console.log(" -- after withdraw -- ");
+  await printBalance(addresses);
 
   // Read all the memos left for the owner.
+  console.log(" == memos == ");
+  const memos = await buyMeACoffee.getMemos();
+  printMemos(memos);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
