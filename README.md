@@ -4,3 +4,4 @@
 
 ## Week 2, How To Build "Buy Me a Coffee" DeFi Dapp
 
+## Week 3, How To Make NFTs with On-Chain Metadata - Hardhat and JavaScript
