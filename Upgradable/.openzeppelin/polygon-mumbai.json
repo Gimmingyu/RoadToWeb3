@@ -1,0 +1,39 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xF8dD5d3bB5AFf0b7F77d7f76AD5d87cCFE982c3B",
+    "txHash": "0x807a45a19b9fab8574075c9e2a8bd9710a305c4a2d17d8695c4178336ad57737"
+  },
+  "proxies": [
+    {
+      "address": "0x70B6D4D7e6016f20a1555E6E4D09c73473e6dea0",
+      "txHash": "0x980d33512265e364c42f98f6cb4f3a787ba7142b4e94b92dc137eaca2ea6745c",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "3c008a032aef4335e6269194dfd24c97ca78e9bd40116238c6595e343a007cf4": {
+      "address": "0xf5449cfC128189F97194Bb6200EC994315901096",
+      "txHash": "0x64a4d43ba652472fee04b5f93fabc8c3fc683456130681b129e3227825309182",
+      "layout": {
+        "solcVersion": "0.8.9",
+        "storage": [
+          {
+            "label": "val",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "Box",
+            "src": "contracts/Box.sol:5"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    }
+  }
+}
